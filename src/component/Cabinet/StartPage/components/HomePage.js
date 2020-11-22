@@ -1,23 +1,27 @@
-import React, { useState, Suspense  } from 'react';
+import React, { useState, Suspense } from 'react';
 import clsx from 'clsx';
-import { useStyles } from '@cabinet/StartPage/style';
-import { Drawer, AppBar, Toolbar, CssBaseline,Typography,
-Divider, ListItem, ListItemIcon,ListItemText, Box }  from '@material-ui/core';
-import { IconButton } from '@material-ui/core';
+import { useStyles } from '@cabinet/StartPage/style'; //eslint-disable-line
+import {
+  Drawer, AppBar, Toolbar, CssBaseline, Typography,
+  Divider, ListItem, ListItemIcon, ListItemText, Box,
+  IconButton,
+} from '@material-ui/core';
+
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
-import { menuList } from '@cabinet/StartPage/setting';
-import { Switch, Route, Redirect } from "react-router-dom";
-import { withRouter } from "react-router";
-import { NavLink  } from 'react-router-dom';
+import { menuList } from '@cabinet/StartPage/setting'; //eslint-disable-line
+import {
+  Switch, Route, Redirect, NavLink,
+} from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
 
 const Dictionary = React.lazy(() => import('@cabinet/Dictionary'));
 
-const HomePage = ({history: { push }}) => {
+const HomePage = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
 
@@ -29,10 +33,9 @@ const HomePage = ({history: { push }}) => {
     setOpen(false);
   };
 
-
-  const openPage = link => {
-    push(link)
-  }
+  // const openPage = link => {
+  //   push(link);
+  // };
 
   return (
     <div className={classes.root}>
@@ -79,17 +82,17 @@ const HomePage = ({history: { push }}) => {
           </IconButton>
         </Box>
         {
-          menuList.map(({id, title, Icon, link}) => {
-            return (
-              <NavLink  to={link} key={id} activeClassName="selected" className={classes.hover}>
-                <Divider />
-                <ListItem>
-                  <ListItemIcon>{Icon !== undefined ? <Icon /> : <MailIcon />}</ListItemIcon>
-                  <ListItemText primary={title} />
-                </ListItem>
-              </NavLink>
-            )
-          })
+          menuList.map(({
+            id, title, Icon, link,
+          }) => (
+            <NavLink to={link} key={id} activeClassName="selected" className={classes.hover}>
+              <Divider />
+              <ListItem>
+                <ListItemIcon>{Icon !== undefined ? <Icon /> : <MailIcon />}</ListItemIcon>
+                <ListItemText primary={title} />
+              </ListItem>
+            </NavLink>
+          ))
         }
         <Divider />
       </Drawer>
@@ -97,25 +100,25 @@ const HomePage = ({history: { push }}) => {
         <div className={classes.toolbar} />
         <Suspense fallback={<div>Загрузка...</div>}>
           <Switch>
-              <Route exact path='/' component={() => <div>Home</div>}/>
-              <Route path='/theme' component={() => <div>theme</div>}/>
-              <Route path='/words' component={Dictionary}/>
-              <Route path='/test' component={() => <div>test</div>}/>
-              <Route path='' component={() => <Redirect to="/" />}/>
-            </Switch>
+            <Route exact path="/" component={() => <div>Home</div>} />
+            <Route path="/theme" component={() => <div>theme</div>} />
+            <Route path="/words" component={Dictionary} />
+            <Route path="/test" component={() => <div>test</div>} />
+            <Route path="" component={() => <Redirect to="/" />} />
+          </Switch>
         </Suspense>
 
       </main>
     </div>
   );
-}
+};
 
 HomePage.propTypes = {
   history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  })
-}
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default compose(
-  withRouter
-)(HomePage)
+  withRouter,
+)(HomePage);

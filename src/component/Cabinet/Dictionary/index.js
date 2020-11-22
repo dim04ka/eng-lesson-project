@@ -1,3 +1,3 @@
-import Dictionary from './component/Dictionary'
+import Dictionary from './component/Dictionary';
 
-export default Dictionary
+export default Dictionary;

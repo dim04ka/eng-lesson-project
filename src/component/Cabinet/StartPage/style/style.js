@@ -1,7 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
+
 const drawerWidth = 240;
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
@@ -64,25 +65,25 @@ export const useStyles = makeStyles((theme) => ({
     color: 'black',
     textDecoration: 'none',
     '& svg': {
-      transition: 'all .3s'
+      transition: 'all .3s',
     },
     '&:hover': {
       '& span': {
-        color: '#3f51b5'
+        color: '#3f51b5',
       },
       '& svg': {
         fill: '#3f51b5',
-        transform: 'translateX(10px)'
-      }
+        transform: 'translateX(10px)',
+      },
     },
     '&.selected': {
       '& span': {
-        color: '#3f51b5'
+        color: '#3f51b5',
       },
       '& svg': {
         fill: '#3f51b5',
-        transform: 'translateX(10px)'
-      }
-    }
-  }
+        transform: 'translateX(10px)',
+      },
+    },
+  },
 }));
